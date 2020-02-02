@@ -1,0 +1,31 @@
+{
+    "name": "scancode-system/company-casa-bonita-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\CompanyCasaBonita\\Providers\\CompanyCasaBonitaServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\CompanyCasaBonita\\": ""
+        }
+    },
+    "type": "laravel-module",
+    "require": {
+        "scancode-system/scancode-base-module":"^1.0",
+        "scancode-system/product-stock-module":"^1.0"
+    }
+}
+ 

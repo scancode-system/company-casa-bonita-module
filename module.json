@@ -1,0 +1,13 @@
+{
+    "name": "CompanyCasaBonita",
+    "alias": "companycasabonita",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\CompanyCasaBonita\\Providers\\CompanyCasaBonitaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
