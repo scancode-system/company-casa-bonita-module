@@ -4,6 +4,8 @@ namespace Modules\CompanyCasaBonita\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Order\Entities\Order;
+use Modules\CompanyCasaBonita\Entities\CasaBonitaOrder;
 
 class CompanyCasaBonitaServiceProvider extends ServiceProvider
 {
@@ -14,11 +16,13 @@ class CompanyCasaBonitaServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerTranslations();
-        $this->registerConfig();
         $this->registerViews();
-        $this->registerFactories();
         $this->loadMigrationsFrom(module_path('CompanyCasaBonita', 'Database/Migrations'));
+
+
+        Order::addDynamicRelation('casa_bonita_order', function (Order $order) {
+            return $order->hasOne(CasaBonitaOrder::class);
+        });
     }
 
     /**
@@ -29,21 +33,6 @@ class CompanyCasaBonitaServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-    }
-
-    /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $this->publishes([
-            module_path('CompanyCasaBonita', 'Config/config.php') => config_path('companycasabonita.php'),
-        ], 'config');
-        $this->mergeConfigFrom(
-            module_path('CompanyCasaBonita', 'Config/config.php'), 'companycasabonita'
-        );
     }
 
     /**
@@ -66,33 +55,6 @@ class CompanyCasaBonitaServiceProvider extends ServiceProvider
         }, \Config::get('view.paths')), [$sourcePath]), 'companycasabonita');
     }
 
-    /**
-     * Register translations.
-     *
-     * @return void
-     */
-    public function registerTranslations()
-    {
-        $langPath = resource_path('lang/modules/companycasabonita');
-
-        if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'companycasabonita');
-        } else {
-            $this->loadTranslationsFrom(module_path('CompanyCasaBonita', 'Resources/lang'), 'companycasabonita');
-        }
-    }
-
-    /**
-     * Register an additional directory of factories.
-     *
-     * @return void
-     */
-    public function registerFactories()
-    {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('CompanyCasaBonita', 'Database/factories'));
-        }
-    }
 
     /**
      * Get the services provided by the provider.
