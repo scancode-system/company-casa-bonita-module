@@ -10,6 +10,16 @@ use Modules\CompanyCasaBonita\Entities\CasaBonitaOrder;
 class CompanyCasaBonitaServiceProvider extends ServiceProvider
 {
     /**
+     * @var string $moduleName
+     */
+    protected $moduleName = 'CompanyCasaBonita';
+
+    /**
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'companycasabonita';
+
+    /**
      * Boot the application events.
      *
      * @return void
@@ -42,7 +52,17 @@ class CompanyCasaBonitaServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/companycasabonita');
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
+
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
+
+        $this->publishes([
+            $sourcePath => $viewPath
+        ], ['views', $this->moduleNameLower . '-module-views']);
+
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
+
+        /*$viewPath = resource_path('views/modules/companycasabonita');
 
         $sourcePath = module_path('CompanyCasaBonita', 'Resources/views');
 
@@ -52,7 +72,7 @@ class CompanyCasaBonitaServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/companycasabonita';
-        }, \Config::get('view.paths')), [$sourcePath]), 'companycasabonita');
+        }, \Config::get('view.paths')), [$sourcePath]), 'companycasabonita');*/
     }
 
 
@@ -64,5 +84,16 @@ class CompanyCasaBonitaServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach (\Config::get('view.paths') as $path) {
+            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }
