@@ -11,7 +11,7 @@ class CasabonitaApi {
     private $senha;
 
     public function __construct() {
-        $this->url = 'http://casabonita.omegasoft.net.br/Casabonita/api/v1';
+        $this->url = 'https://casabonita.omegasoft.net.br/Casabonita/api/v1';
         //$this->url = 'http://casabonita.omegasoft.net.br/Desenv/api/v1';
         $this->login = '';
         $this->senha = '';
@@ -161,7 +161,7 @@ class CasabonitaApi {
             $cnpj_cpf_key = 'cpf';
 
         } 
-
+        dd($this->url.'/clientes/?'.$cnpj_cpf_key.'='.$cpf_cnpj);
         $curl = curl_init($this->url.'/clientes/?'.$cnpj_cpf_key.'='.$cpf_cnpj);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);   
