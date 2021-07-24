@@ -142,7 +142,7 @@
 										{{ $casabonita_pedido->message }}
 									</td>
 									<td>
-										{{ Form::open(['route' => ['companycasabonita.api.store', $casabonita_pedido->id_pedido]]) }}
+										{{ Form::open(['route' => ['companycasabonita.api.store', $casabonita_pedido->order_id]]) }}
 										<input type="submit" value="Importar" class="btn btn-default" />
 										{{ Form::close() }}
 									</td>

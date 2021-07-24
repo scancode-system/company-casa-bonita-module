@@ -161,7 +161,7 @@ class CasabonitaApi {
             $cnpj_cpf_key = 'cpf';
 
         } 
-        dd($this->url.'/clientes/?'.$cnpj_cpf_key.'='.$cpf_cnpj);
+        //dd($this->url.'/clientes/?'.$cnpj_cpf_key.'='.$cpf_cnpj);
         $curl = curl_init($this->url.'/clientes/?'.$cnpj_cpf_key.'='.$cpf_cnpj);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);   
