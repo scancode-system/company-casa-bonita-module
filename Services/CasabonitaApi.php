@@ -76,7 +76,7 @@ class CasabonitaApi {
             }
 
             $data = [
-                'codEmpresa' => '3',
+                'codEmpresa' => '2',
                 'codCliente' => $cliente_codigo,
                 'nomeCliente' => $cliente->corporate_name,
                 'codPedidoEcommerce' => null,
@@ -99,9 +99,9 @@ class CasabonitaApi {
             ];
 
             $data_string = json_encode($data);  
-            //dd($data_string);
+           // dd($data_string);
             //dd('Nao passar daqui');
-
+            //dd($this->url.'/pedidos');
             $curl = curl_init($this->url.'/pedidos');
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
@@ -115,9 +115,9 @@ class CasabonitaApi {
             ));    
 
             $response = json_decode(utf8_encode(curl_exec($curl)));
-
+            //dd($response);
             $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
+            //dd($status);
             curl_close($curl);
             
             //dd( $status);
