@@ -18,7 +18,7 @@
 	</tr>
 	<tr>
 		<td>
-		Cliente: {{ $order->order_client->buyer ?? 'N/A' }} Razão Social: {{ $order->order_client->corporate_name ?? 'N/A' }}
+		Cliente: {{ $order->order_client->buyer ?? 'N/A' }} Razão Social: {{ $order->order_client->corporate_name ?? 'N/A' }} CPF/CNPJ: {{ $order->order_client->cpf_cnpj ?? 'N/A' }}
 		</td>
 	</tr>
 </table>
