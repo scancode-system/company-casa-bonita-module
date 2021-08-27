@@ -5,7 +5,7 @@
 		</td>
 	</tr>
 </table>
-<table class="mb-5">
+<!--<table class="mb-5">
 	<tr>
 		<td>
 			ESTOU DE ACORDO COM O PEDIDO:<br>
@@ -13,7 +13,7 @@
 			**** OS PREÇOS ACIMA ESTÃO SUJEITOS A TRIBUTAÇÃO DE IPI ****
 		</td>
 	</tr>
-</table>
+</table>-->
 <table class="mt-5 w-100 mb-5">
 	<tr>
 		<td class="border-bottom border-dark" style="width: 23%;">
@@ -60,22 +60,25 @@
 		</td>
 	</tr>
 </table>
-<table class="mb-3">
+<!--<table class="mb-3">
 	<tr>
 		<td>
 			Pedidos mínimo R$1.500,00 - 30/60/90/120 ACIMA 6.000<br>
 			Pagamento antecipado com 5% de DESCONTO.
 		</td>
 	</tr>
-</table>
+</table>-->
 <table class="w-100">
 	<tr>
 		<td>Observações:</td>
 	</tr>
 	<tr>
 		<td>
-			<div class="w-100 border border-dark" style="min-height: 250px; border-radius:10px">
-			{{ $order->observation }}
+			<div class="w-100 border border-dark p-2" style="min-height: 250px; border-radius:10px">
+			<p class="p-0 mb-0">{!! nl2br($setting_pdf->global_observation) !!}</p>
+			@if(!is_null($order->observation))
+			<p class="mb-0 mt-3">{{ $order->observation }} </p>
+			@endif
 			</div>	
 		</td>
 	</tr>
